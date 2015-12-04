@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+{% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>BODY RELAX</title>
+
+<script src="//upcdn.b0.upaiyun.com/libs/jqueryui/jquery.ui-1.9.0.min.js"></script>
+ <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<!-- 引入 Bootstrap -->
+ <link href="http://apps.bdimg.com/libs/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+ <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+ <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+ <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+ <style type="text/css" src="{% static 'bootstrap/css/bootstrap.css' %}"></style>
+ <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+{% load i18n %}
+{% load url from future %}
+{% block content %}
+
+   <div calss="signin" style="margin-right:800px;margin-left:50px;margin-top:50px"/>
+<form action="" method="post">
+  {% csrf_token %}
+  <fieldset>
+     
+    <legend>Body Relaxation Center</legend>
+    {{ form.non_field_errors }}
+    {% for field in form %}
+    {{ field.errors }}
+    {% comment %} Displaying checkboxes differently {% endcomment %}
+    {% if field.name == 'remember_me' %}
+    <p class="checkbox">
+    <label for="id_{{ field.name }}">{{ field }} {{ field.label }}</label>
+    </p>
+    {% else %}
+    <p>
+    {{ field.label_tag }}
+    {{ field }}
+    </p>
+    {% endif %}
+    {% endfor %}
+  </fieldset>
+  <button type="submit" class="btn btn-xs btn-success">{% trans "Sign in" %}</button></a>
+  
+  <a href="{% url 'userena_signup' %}" title="{% trans 'Sign up' %}"><button type="button" class="btn btn-xs btn-info">Sign up</button></a>
+
+  <p class="forgot-password"><a href="{% url 'userena_password_reset' %}" title="{% trans 'Forgot your password?' %}">{% trans "Forgot your password?" %}</a></p>
+  
+  {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
+</form>
+    </div>
+    
+    
+    <div calss="address" style="margin-right:800px;margin-left:15px;margin-top:50px"/>
+    <div class="container"> 
+   
+        
+             
+            
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Address</h3>
+            </div>
+            <div class="panel-body">
+              95-8 Maher Lane <br />
+                Harriman, NY 10926 </p>
+            </div>
+          </div>
+           <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">We are open 7 days a week</h3>
+            </div>
+            <div class="panel-body">
+              10 AM to 10 PM
+               </div>
+          </div>
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Call us for appointments</h3>
+            </div>
+            <div class="panel-body">
+              (845) 774-1006 <br />
+               
+              </div>
+          </div>
+          
+          
+        <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Email us or like us on Facebook</h3>
+            </div>
+            <div class="panel-body">
+              Bodyrelax@gmail.com <br />
+              Bodyrelax@facebook.com<br />
+               
+              </div>
+          </div>          
+          
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Body massage</h3>
+            </div>
+            <div class="panel-body">
+              15mins------------$15</br>
+              30mins------------$35</br>
+              45mins------------$45</br>
+              60mins------------$60</br>
+           
+               
+              </div>
+          </div>       
+          
+          
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Body massage</h3>
+            </div>
+            <div class="panel-body">
+              30mins------------$25</br>
+           
+              60mins------------$40</br>
+           
+               
+              </div>
+          </div>          
+
+        
+          
+
+ </div>
+    </div>
+
+
+
+
+</div>
+<div calss="envent" style="margin-left:540px;margin-right:15px;margin-top:-900px"/>
+<div>
+ <h1>
+    <span class="label label-danger">Foot massage:Come as Three people for $19.99/each!</span> </br><h1>
+     <h1>
+    <span class="label label-warning">Speical foot massage $39.99/hour</span> </br><h1>
+    <h1>
+    <span class="label label-info">Holiday Speical</span> </br><h1>
+    <h1>
+    <span class="label label-success">Unlimited visits with special pricing!</span></br><h1>
+</div>
+</div>
+<div calss="intro" style="margin-left:540px;margin-right:50px"/>
+
+<div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">About Us</h3>
+            </div>
+            <div class="panel-body">
+              We have been servicing our clients with our brand of traditional Bodywork therapy in the Harriman, New York area for more than 10 years.
+
+The satisfaction you will be accommodated with starts with the beautiful, comfortable, and clean environment that our facility offers. Our highly skilled professionals will leave you with a broad sense of fulfillment after your session.
+
+We offer the highest level of services through the most affordable prices. Our bodywork therapy sessions can alleviate you from the stress, pressure, and aches that you are experiencing.
+           
+               
+              </div>
+          </div>          
+
+    <div calss="intro" style="margin-left:500px;margin-right:-800px;margin-top:-780px"/>
+ {% comment %}<li><a href="{% url 'userena_show_staff' user.username %}">{% trans "Masseur Status" %}</a></li>
+ <li><a href="{% url 'userena_feedback' user.username %}">Feedback</a></li>    {% endcomment %}  
+
+
+{% endblock %}
+
+
+ 
+
+

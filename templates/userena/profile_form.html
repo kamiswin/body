@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% block content %}
+
+<form action="" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% trans "Book online" %}</legend>
+    <div class="form-group">
+    
+    <div style="margin-top:20px;margin-bottom:20px;">
+    <div class="row">
+    <div class="col-xs-4">
+    <label for="date">Select Date</label>
+    <select type="date"  class="form-control" placeholder="{{ form.date }}</select>
+    </div>
+    </div>
+    <div style="margin-top:20px;margin-bottom:20px;">
+    <div class="row">
+    <div class="col-xs-4">
+    <label for="time">Select Time</label>
+    <select type="time"  class="form-control" placeholder="{{ form.time }}</select>
+    </div>
+    </div>
+    <div style="margin-top:20px;margin-bottom:20px;">
+    <div class="row">
+    <div class="col-xs-4">
+    <label for="exampleInputEmail1">Select the place you want</label>
+    <select type="email"  class="form-control" placeholder="{{ form.home_or_store }}</select>
+    </div>
+    </div>
+    <div style="margin-top:20px;margin-bottom:20px;">
+    <div class="row">
+    <div class="col-xs-4">
+    <label for="pickstaff">Select masseur</label>
+    <select type="pickstaff"  class="form-control" placeholder="{{ form.pickstaff }}</select>
+    </div>
+    </div>
+    <div style="margin-top:20px;margin-bottom:20px;">
+    <div class="row">
+    <div class="col-xs-4">
+    <label for="period">How long would you like.</br>(Minimum 60 mins for home service)</label>
+    <select type="period"  class="form-control" placeholder="{{ form.period }}</select>
+    </div>
+    </div>
+    <div style="margin-top:20px;margin-bottom:20px;">
+    <div class="row">
+     <div class="col-xs-4">
+    <label for="phone">Your Phone</label>
+    <input class="form-control" placeholder="{{ form.phone }}
+    </div>
+    </div>
+    <div style="margin-top:20px;margin-bottom:20px;">
+    <div class="row">
+     <div class="col-xs-4">
+    <label for="address">Your Address</label>
+    <input class=form-control placeholder={{form.address}}
+    </div>
+    </div>
+    
+    
+    
+  </fieldset>
+  <input type="submit" class="btn btn-info" value="{% trans "Submit" %}" />
+
+</form>
+{% endblock %}

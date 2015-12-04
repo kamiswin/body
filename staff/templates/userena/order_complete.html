@@ -1,0 +1,69 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="alert alert-info" role="alert">
+        <strong>Thank you</strong></br>
+ <strong>Dear customer. Please come on time. If you could not make it, Please ring 845-783-8866 for reschedule or cancelation.Thank you very much.</strong></p>
+      </div>
+<div class="page-header">
+       {% block profile_details %}
+        <div><h4>Booking History</h4></div>
+        
+          {% block profile_definition_list %}
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table">
+            <thead>
+              
+              {% if profile.user.email and not hide_email %}
+              
+              <th>{% trans "Email" %}</th>
+              <th>{{ profile.user.email }}</th>
+            {% endif %}</tr>
+             <tr>
+                 {% if profile.phone %}
+               <th>{% trans "Phone" %} </th>
+              <th>{{ profile.phone }}</th>
+            {% endif %}</tr>
+             <tr>
+            {% if profile.vip_card_expire_date %}
+               <th>{% trans "Vip card expire date" %} </th>
+              <th>{{ profile.vip_card_expire_date }}</th>
+            {% endif %}</tr>
+            <tr>
+            {% if profile.blance %}
+               <th>{% trans "Acount Blance" %} </th>
+              <th>{{ profile.blance }}</th>
+            {% endif %}</tr>
+            <tr>
+            {% if profile.pickstaff %}
+               <th>{% trans "Staff booked" %} </th>
+              <th>{{ profile.pickstaff }}</th>
+            {% endif %}</tr>
+            <tr>
+            {% if profile.time %}
+               <th>{% trans "Time" %} </th>
+              <th>{{ profile.time }}</th>
+            {% endif %}</tr>
+            
+          {% endblock %}
+    
+      {% endblock %}
+            </tbody>
+          </table>
+
+      
+            
+            
+           
+    </div>
+  </div>
+  </body>
+</html>
+{% endblock %}
+

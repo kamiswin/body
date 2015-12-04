@@ -1,25 +1,41 @@
-#!/usr/bin/env python
+from setuptools import setup, find_packages
+import sys
 
-from setuptools import setup
+userena = __import__('userena')
 
-setup(
-    # GETTING-STARTED: set your app name:
-    name='YourAppName',
-    # GETTING-STARTED: set your app version:
-    version='1.0',
-    # GETTING-STARTED: set your app description:
-    description='OpenShift App',
-    # GETTING-STARTED: set author name (your name):
-    author='Your Name',
-    # GETTING-STARTED: set author email (your email):
-    author_email='example@example.com',
-    # GETTING-STARTED: set author url (your url):
-    url='http://www.python.org/sigs/distutils-sig/',
-    # GETTING-STARTED: define required django version:
-    install_requires=[
-        'Django==1.8.4'
-    ],
-    dependency_links=[
-        'https://pypi.python.org/simple/django/'
-    ],
-)
+readme_file = 'README.mkd'
+try:
+    long_description = open(readme_file).read()
+except IOError:
+    sys.stderr.write("[ERROR] Cannot find file specified as "
+        "``long_description`` (%s)\n" % readme_file)
+    sys.exit(1)
+
+install_requires = ['easy_thumbnails', 'django-guardian', 'html2text==2014.12.29']
+try:
+    from collections import OrderedDict
+except ImportError:
+    install_requires.append('ordereddict')
+
+setup(name='django-userena',
+      version=userena.get_version(),
+      description='Complete user management application for Django',
+      long_description=long_description,
+      zip_safe=False,
+      author='Petar Radosevic',
+      author_email='petar@wunki.org',
+      url='https://github.com/bread-and-pepper/django-userena/',
+      download_url='https://github.com/bread-and-pepper/django-userena/downloads',
+      packages = find_packages(exclude=['demo', 'demo.*']),
+      include_package_data=True,
+      install_requires = install_requires,
+      test_suite='tests.main',
+      classifiers = ['Development Status :: 4 - Beta',
+                     'Environment :: Web Environment',
+                     'Framework :: Django',
+                     'Intended Audience :: Developers',
+                     'License :: OSI Approved :: BSD License',
+                     'Operating System :: OS Independent',
+                     'Programming Language :: Python',
+                     'Topic :: Utilities'],
+      )

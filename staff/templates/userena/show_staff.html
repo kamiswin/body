@@ -1,0 +1,44 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+
+
+<div>
+<h3>Masseur Status</h3>
+
+{%for Staff in staffs.all%}
+
+
+<div class="col-md-6">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Masseur Name</th>
+                <th>Available time</th>
+          
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td>{{Staff.name}}</td>
+                <td>{{Staff.available_time}}</td>
+      
+            </tbody>
+          </table>
+        </div>
+      </div>
+{%endfor%} 
+
+<a href="accounts/order" target="abc"/><button type="submit" class="btn btn-sm btn-info">Booking Now</button></a>
+</div>
+                 
+   {% endblock %}
+          
+

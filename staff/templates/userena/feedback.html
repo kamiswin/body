@@ -1,0 +1,18 @@
+﻿{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<h3>Feedback Form</h3>
+
+ 
+<form method='post' action='.'>{% csrf_token %}
+{{ fm.text }}</br>
+
+<button type="submit" class="btn btn-sm btn-info">Submit</button>
+</form>
+</div>
+{% endblock %}
