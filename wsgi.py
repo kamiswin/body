@@ -1,8 +1,8 @@
 import os
 import sys
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'DJANGO_BODY.settings'
-sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'DJANGO_BODY'))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'body.settings'
+sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'body'))
 virtenv = os.environ['APPDIR'] + '/virtenv/'
 os.environ['PYTHON_EGG_CACHE'] = os.path.join(virtenv, 'lib/python2.7/site-packages')
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
