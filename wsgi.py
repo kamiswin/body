@@ -1,14 +1,15 @@
-"""
-WSGI config for body project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
-"""
-
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "body.settings")
+import sys
 
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+os.environ['DJANGO_SETTINGS_MODULE'] = 'DJANGO_BODY.settings'
+sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'DJANGO_BODY'))
+virtenv = os.environ['APPDIR'] + '/virtenv/'
+os.environ['PYTHON_EGG_CACHE'] = os.path.join(virtenv, 'lib/python2.6/site-packages')
+virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
+try:
+    execfile(virtualenv, dict(__file__=virtualenv))
+except:
+    pass
+
+import django.core.handlers.wsgi
+application = django.core.handlers.wsgi.WSGIHandler()

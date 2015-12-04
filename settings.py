@@ -9,7 +9,13 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+import os, imp
+ON_OPENSHIFT = False
+if os.environ.has_key('OPENSHIFT_REPO_DIR'):
+    ON_OPENSHIFT = True
+	
+PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -17,12 +23,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^$7=a%rulqhqyo$rb5$bpuiu1v=g3g88qssp@@47&g1dcy@hjm'
+default_keys = { 'SECRET_KEY':'^$7=a%rulqhqyo$rb5$bpuiu1v=g3g88qssp@@47&g1dcy@hjm'}
+use_keys = default_keys
+if ON_OPENSHIFT:
+    imp.find_module('openshiftlibs')
+    import openshiftlibs
+    use_keys = openshiftlibs.openshift_secure(default_keys)
+SECRET_KEY = use_keys['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    ('kamiswin', 'kamiswin@hotmail.com'),
+)
+
+MANAGERS = ADMINS
 
 ALLOWED_HOSTS = []
 
@@ -30,6 +48,12 @@ ANONYMOUS_USER_ID = -1
 
 AUTH_PROFILE_MODULE = 'accounts.MyProfile'
 # Application definition
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+#     'django.template.loaders.eggs.Loader',
+)
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -60,6 +84,14 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'body.urls'
 
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_DIR, 'templates'),
+)
+
+
 WSGI_APPLICATION = 'body.wsgi.application'
 
 
@@ -69,11 +101,11 @@ WSGI_APPLICATION = 'body.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'body',                      # Or path to database file if using sqlite3.
-        'USER': 'body',                      # Not used with sqlite3.
+        'NAME': os.path.join(PROJECT_DIR, 'dbfile'),                 # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '3306',
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',
     }
 }
 
@@ -127,6 +159,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'public/media/')
 MEDIA_URL = '/media/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 USERENA_ACTIVATION_REQUIRED = False
 USERENA_DISABLE_PROFILE_LIST = True
